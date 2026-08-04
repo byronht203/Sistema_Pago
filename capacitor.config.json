@@ -1,0 +1,10 @@
+{
+  "appId": "com.sistemapagos.app",
+  "appName": "Sistema de Pago",
+  "webDir": "public",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "https://sistemapago-production.up.railway.app",
+    "cleartext": true
+  }
+}
