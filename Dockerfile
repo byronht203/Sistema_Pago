@@ -29,11 +29,16 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 RUN npm install
 RUN npm run build
 
-# Set permissions for Laravel
-RUN chmod -R 777 storage bootstrap/cache
+# Ensure storage directories exist with write permissions
+RUN mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache/data storage/logs \
+    && chmod -R 777 storage bootstrap/cache
 
-# Expose container port
 EXPOSE 8080
 
-# Start Laravel application
-CMD php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+# Startup script
+CMD mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache/data storage/logs \
+    && chmod -R 777 storage bootstrap/cache \
+    && php artisan config:clear \
+    && php artisan route:clear \
+    && php artisan view:clear \
+    && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
