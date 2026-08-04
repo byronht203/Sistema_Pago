@@ -2,4 +2,4 @@
 NIXPACKS_PHP_VERSION = "8.2"
 
 [phases.setup]
-nixPkgs = ["...", "php82", "php82Packages.composer", "nodejs_20"]
+nixPkgs = ["php82", "php82Packages.composer", "nodejs_20"]
